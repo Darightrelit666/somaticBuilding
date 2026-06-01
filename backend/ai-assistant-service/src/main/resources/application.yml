@@ -7,6 +7,11 @@
       force: true
 
 spring:
+  config:
+    import:
+      - optional:classpath:application-local-private.yml
+      - optional:file:./backend/ai-assistant-service/src/main/resources/application-local-private.yml
+      - optional:file:./application-local-private.yml
   application:
     name: ai-assistant-service
   datasource:
@@ -20,7 +25,8 @@ spring:
         enabled: false
       config:
         enabled: false
-  # AI閺堝秴濮熼悧瑙勬箒闁板秶鐤?  ai:
+  # AI configuration. Real API keys are loaded from ignored local private config or env vars.
+  ai:
     chat:
       memory:
         repository:
