@@ -1,0 +1,26 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Strength exercise placeholder</title>
+  <desc id="desc">Abstract strength training artwork used as a local fallback image.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#86efac"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="220" cy="170" r="140" fill="#16a34a" opacity="0.12"/>
+  <circle cx="1030" cy="760" r="180" fill="#22c55e" opacity="0.1"/>
+  <g transform="translate(150 390)">
+    <rect x="0" y="-18" width="900" height="36" rx="18" fill="url(#bar)"/>
+    <rect x="-56" y="-84" width="56" height="168" rx="20" fill="#14532d"/>
+    <rect x="900" y="-84" width="56" height="168" rx="20" fill="#14532d"/>
+    <rect x="-112" y="-120" width="56" height="240" rx="20" fill="#166534"/>
+    <rect x="956" y="-120" width="56" height="240" rx="20" fill="#166534"/>
+  </g>
+  <text x="150" y="170" fill="#bbf7d0" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">STRENGTH</text>
+  <text x="150" y="238" fill="#86efac" font-family="Arial, Helvetica, sans-serif" font-size="32" letter-spacing="2">SOMATIC BUILDING</text>
+</svg>

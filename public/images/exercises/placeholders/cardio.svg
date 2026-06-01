@@ -1,0 +1,23 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Cardio exercise placeholder</title>
+  <desc id="desc">Abstract cardio training artwork used as a local fallback image.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c1c2d"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#67e8f9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="1040" cy="140" r="130" fill="#22d3ee" opacity="0.12"/>
+  <circle cx="180" cy="770" r="170" fill="#06b6d4" opacity="0.1"/>
+  <g transform="translate(120 450)">
+    <path d="M0 0 H170 L230 -90 L320 140 L410 -40 H550 L620 0 H960" fill="none" stroke="url(#pulse)" stroke-width="22" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M0 80 H960" fill="none" stroke="#0e7490" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+  <text x="120" y="170" fill="#a5f3fc" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">CARDIO</text>
+  <text x="120" y="238" fill="#67e8f9" font-family="Arial, Helvetica, sans-serif" font-size="32" letter-spacing="2">SOMATIC BUILDING</text>
+</svg>

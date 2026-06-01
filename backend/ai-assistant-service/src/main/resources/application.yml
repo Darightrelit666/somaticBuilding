@@ -1,0 +1,110 @@
+﻿server:
+  port: 8090
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: ai-assistant-service
+  datasource:
+    url: jdbc:mysql://localhost:3308/somaticbuilding_db?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: ${MYSQL_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+  # AI閺堝秴濮熼悧瑙勬箒闁板秶鐤?  ai:
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+            platform: mariadb
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: deepseek-r1:7b
+    openai:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode
+      api-key: ${OPENAI_API_KEY:}
+      chat:
+        options:
+          model: qwen-max-latest
+      embedding:
+        options:
+          model: text-embedding-v3
+          dimensions: 1024
+    deepseek:
+      base-url: https://api.deepseek.com
+      api-key: ${DEEPSEEK_API_KEY:}
+      chat:
+        options:
+          model: deepseek-chat
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+integration:
+  workout:
+    base-url: http://localhost:8084
+  exercise:
+    base-url: http://localhost:8083
+    auto-provision:
+      enabled: true
+  content-extractor:
+    enabled: true
+    yt-dlp:
+      command: yt-dlp
+      timeout-seconds: 35
+      audio-timeout-seconds: 120
+      cookies-from-browser:
+      cookies-file:
+      referer:
+    ffmpeg:
+      command: ffmpeg
+    ffprobe:
+      command: ffprobe
+    clip:
+      enabled: true
+      timeout-seconds: 240
+      min-duration-seconds: 8
+      max-duration-seconds: 40
+    frames:
+      enabled: true
+      storage-dir: D:/somaticBuilding/data/content-analysis-frames
+      timeout-seconds: 240
+      interval-seconds: 2
+      max-frames: 12
+      max-analysis-seconds: 180
+    visual:
+      enabled: true
+      endpoint: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+      model: qwen-vl-plus
+      max-frames: 12
+      timeout-seconds: 90
+    asr:
+      enabled: true
+      mode: docker
+      command: whisper
+      model: tiny
+      language: zh
+      timeout-seconds: 300
+      docker:
+        command: docker
+        image: witblack/whisper:tiny
+        pull-missing: true
+    max-text-chars: 12000

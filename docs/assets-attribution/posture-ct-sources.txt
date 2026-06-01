@@ -1,0 +1,18 @@
+﻿Sources for posture CT assets used in project:
+
+1) l-ankle-ct.png
+- Source page: https://commons.wikimedia.org/wiki/File:TriplanefractureCT1.png
+- Direct file path: https://commons.wikimedia.org/wiki/Special:FilePath/TriplanefractureCT1.png
+- License: Creative Commons Attribution-ShareAlike (CC BY-SA)
+- Author: James Heilman, MD
+
+2) r-ankle-ct.png
+- Source page: https://commons.wikimedia.org/wiki/File:TriplanefractureCT2.png
+- Direct file path: https://commons.wikimedia.org/wiki/Special:FilePath/TriplanefractureCT2.png
+- License: Creative Commons Attribution-ShareAlike (CC BY-SA)
+- Author: James Heilman, MD
+3) ankle-ct-reference.png
+- Source page: https://commons.wikimedia.org/wiki/File:Right_foot_before_surgery_in_a_CT.png
+- Direct file path: https://commons.wikimedia.org/wiki/Special:FilePath/Right%20foot%20before%20surgery%20in%20a%20CT.png
+- License: CC BY 4.0
+- Author: ClemensDunzinger

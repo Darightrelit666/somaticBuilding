@@ -1,0 +1,55 @@
+﻿server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  profiles:
+    default: local
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        enabled: false
+      config:
+        enabled: false
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/v1/auth/**
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/v1/user/**
+        - id: exercise-service
+          uri: lb://exercise-service
+          predicates:
+            - Path=/api/v1/exercise/**
+        - id: workout-service
+          uri: lb://workout-service
+          predicates:
+            - Path=/api/v1/workout/**
+        - id: training-service
+          uri: lb://training-service
+          predicates:
+            - Path=/api/v1/training/**
+        - id: assessment-service
+          uri: lb://assessment-service
+          predicates:
+            - Path=/api/v1/assessment/**
+        - id: profile-service
+          uri: lb://profile-service
+          predicates:
+            - Path=/api/v1/ability/**
+        - id: ai-assistant-service
+          uri: lb://ai-assistant-service
+          predicates:
+            - Path=/api/v1/assistant/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

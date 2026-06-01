@@ -1,0 +1,25 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">General exercise placeholder</title>
+  <desc id="desc">Abstract general training artwork used as a local fallback image.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#374151"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect x="120" y="140" width="960" height="620" rx="44" fill="#0f172a" fill-opacity="0.5" stroke="#475569" stroke-width="2"/>
+  <g transform="translate(260 275)">
+    <rect x="0" y="0" width="680" height="350" rx="30" fill="#0b1222" stroke="#334155" stroke-width="3"/>
+    <circle cx="150" cy="175" r="72" fill="#1e293b" stroke="#64748b" stroke-width="3"/>
+    <circle cx="340" cy="175" r="72" fill="#1e293b" stroke="#64748b" stroke-width="3"/>
+    <circle cx="530" cy="175" r="72" fill="#1e293b" stroke="#64748b" stroke-width="3"/>
+    <path d="M110 175 H570" stroke="url(#mark)" stroke-width="22" stroke-linecap="round"/>
+  </g>
+  <text x="260" y="160" fill="#e2e8f0" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="700">EXERCISE</text>
+  <text x="260" y="224" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="32" letter-spacing="2">SOMATIC BUILDING</text>
+</svg>

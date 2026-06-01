@@ -1,0 +1,8 @@
+public/models/**/*.zip filter=lfs diff=lfs merge=lfs -text
+public/models/**/*.obj filter=lfs diff=lfs merge=lfs -text
+public/models/**/*.glb filter=lfs diff=lfs merge=lfs -text
+public/models/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+public/models/**/*.stl filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.webm filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,49 @@
+﻿server:
+  port: 8083
+
+spring:
+  application:
+    name: exercise-service
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 220MB
+  datasource:
+    url: jdbc:mysql://localhost:3308/somaticbuilding_db?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: ${MYSQL_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6380
+      password: ${REDIS_PASSWORD:123456}
+      timeout: 300ms
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      service: exercise-service
+
+exercise:
+  media:
+    storage-path: ./storage/exercise-media
+  performance:
+    bulk-media-fetch-enabled: true
+    list-cache-enabled: true
+    list-cache-ttl-seconds: 90
+
