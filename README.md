@@ -1,5 +1,7 @@
 # SomaticBuilding
 
+[中文说明](README.zh-CN.md) | [English](README.md)
+
 SomaticBuilding is an AI-assisted somatic training and movement assessment system. It combines exercise-library management, posture and functional assessment, workout/module/course/program planning, training execution, athlete profile visualization, RAG-based coaching, and short-video-to-training-plan parsing in a full-stack React + Spring Boot microservice application.
 
 本项目定位为面向身体功能训练、动作学习、训练编排和运动能力画像的一体化系统。系统不仅提供前端页面展示，还围绕真实数据库、后端接口、训练执行记录、动作库数据、AI 训练方案生成、短视频解析、RAG 知识问答、压测和自动化测试建立了完整工程闭环。
