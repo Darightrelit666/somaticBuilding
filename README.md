@@ -1,35 +1,55 @@
-# SomaticBuilding
+# SomaticBuilding 中文说明
 
-[中文说明](README.zh-CN.md) | [English](README.md)
+[English README](README.en.md)
 
-SomaticBuilding is an AI-assisted somatic training and movement assessment system. It combines exercise-library management, posture and functional assessment, workout/module/course/program planning, training execution, athlete profile visualization, RAG-based coaching, and short-video-to-training-plan parsing in a full-stack React + Spring Boot microservice application.
+SomaticBuilding 是一个 AI 辅助的身体功能训练与动作评估系统，围绕“动作库、体态评估、身体功能评估、训练编排、训练执行、训练总结、运动员画像、AI 教练、短视频解析生成训练计划”等核心场景，构建了 React 前端 + Spring Boot 微服务后端 + MySQL/Redis 数据层的一体化工程项目。
 
-本项目定位为面向身体功能训练、动作学习、训练编排和运动能力画像的一体化系统。系统不仅提供前端页面展示，还围绕真实数据库、后端接口、训练执行记录、动作库数据、AI 训练方案生成、短视频解析、RAG 知识问答、压测和自动化测试建立了完整工程闭环。
+本项目不是单纯页面原型，而是逐步完成了前后端接口联通、数据库表设计、真实训练数据记录、AI 结构化训练方案生成、RAG 知识问答、短视频内容解析、动作自动补全、测试与压测报告等工程内容，适合作为软件工程毕业设计项目展示。
 
-## 1. Project Highlights
+## 1. 项目定位
 
-- Full-stack implementation: React/Vite frontend + Spring Boot/Spring Cloud backend services.
-- Exercise library: system-based library navigation, style filtering, exercise detail pages, custom exercise creation, image/video media support, and database-backed queries.
-- Training builder: quick modules, full courses, weekly programs, drag-and-drop program planning, block/group/item parameters, template save/apply, and short-link sharing.
-- Training execution: planned workout and actual execution are separated; workout player records real set/timer/exercise logs and summary data.
-- Assessment and profile: system onboarding, goal input, movement/functional assessment, posture module, athlete profile, ability trends, goal radar and recommendation visualization.
-- AI coach: separated Plan and Q&A modes; structured plan payloads for visual option cards; RAG knowledge retrieval for professional coaching answers.
-- Short-video parsing: supports URL-based content extraction, subtitle/audio/frame analysis pipeline, movement candidate review, and plan generation from parsed video content.
-- Data engineering: MySQL schema scripts, exercise data import/backfill scripts, Redis cache optimization, and performance reports.
-- Quality evidence: frontend unit tests, backend unit/integration tests, build verification, and k6 load-test reports.
+SomaticBuilding 面向需要进行身体功能训练、动作学习、训练计划编排和能力追踪的用户。系统希望解决三个问题：
 
-## 2. Core User Flows
+1. 用户不知道自己当前身体功能状态如何。
+2. 用户不知道应该如何把动作组合成科学训练课或训练模块。
+3. 用户看到短视频平台上的训练内容后，难以结构化复用为自己的训练计划。
 
-### 2.1 System Onboarding and Assessment
+因此项目设计了从“评估 -> 画像 -> 动作库 -> 训练编排 -> 训练执行 -> 总结反馈 -> AI 辅助优化”的完整闭环。
 
-1. User enters the system flow.
-2. Login or registration is completed through backend auth APIs.
-3. User fills baseline lifestyle, movement/injury history, equipment, level and goals.
-4. Goal synthesis can call AI to produce structured summaries, recommendation signals and radar data.
-5. Functional assessment and posture assessment produce ability/profile data.
-6. Profile page visualizes current status, goal profile and training recommendations.
+## 2. 核心功能概览
 
-Related frontend routes:
+- 用户登录注册：支持系统入口登录、注册、昵称设置和基础用户信息同步。
+- 系统评估流程：包含生活方式、伤病史、运动经历、训练目标、FMS/动作评估等流程。
+- 动作库系统：支持按照训练系统/风格进入动作库，查看动作详情、图片、视频、目标肌群、步骤和注意事项。
+- 自定义动作：支持用户新增动作，并上传本地图片或视频资源。
+- 训练模块 Module：用于快速训练、关节灵活性、稳定性、激活、拉伸放松等短训练单元。
+- 训练课 Course：用于完整单节训练课，包含不同训练风格对应的 block、动作组、组数、次数、休息和训练方式。
+- 周计划 Program：以 Day 1、Day 2 等方式安排一周训练模板，启动后再绑定真实日期。
+- 训练执行 Player：将训练计划和实际执行分离，记录真实 set、timer、exercise log。
+- 训练总结 Summary：基于真实训练执行记录统计，而不是只读取计划推算。
+- Athlete Profile：展示用户能力趋势、训练记录、推荐、目标画像和可视化数据。
+- Posture 体态模块：展示身体关节风险点、关节对应扫描图、体态/关节状态信息。
+- AI Plan：根据自然语言需求生成训练 module 或 course，并以可视化方案卡片呈现。
+- AI Q&A：使用 RAG 知识检索回答训练相关问题，与训练编排入口分离。
+- 短视频解析：根据 B 站、小红书、抖音等外部链接解析字幕、音频、画面帧，并尝试生成对应训练内容。
+- 分享能力：支持用户分享自己创建的 module/course，生成 Base62 短链接。
+- 性能优化：包含 SQL 索引、Redis 热点缓存、批量查询优化和 k6 压测报告。
+- 自动化测试：包含前端 Vitest、后端 JUnit/Mockito/MockMvc 单元测试和集成测试。
+
+## 3. 主要用户流程
+
+### 3.1 系统入口与评估流程
+
+1. 用户进入 `/system`。
+2. 用户登录或注册。
+3. 系统提示注册成功或登录成功。
+4. 用户填写基础信息、运动经历、伤病史、训练目标、器械条件等。
+5. 系统调用目标分析接口，生成简短分析结果和目标画像。
+6. 用户进入动作/功能评估流程。
+7. 评估结果写入后端并在 Profile 中展示。
+8. 系统根据用户状态推荐后续训练方向。
+
+相关前端路由：
 
 - `/system`
 - `/system/login`
@@ -42,40 +62,34 @@ Related frontend routes:
 - `/system/history`
 - `/system/summary`
 
-### 2.2 Exercise Library
+### 3.2 动作库流程
 
-1. AppShell entry opens `/systems` and lets the user select an exercise system/style.
-2. `/library/:systemId` shows exercises belonging to the selected system.
-3. Training builder can open the library in a simplified selection mode with style filters.
-4. Exercise detail pages show ability profile, target muscles, execution steps, cautions and media.
-5. Users can add custom exercises and upload local cover/video media.
+1. 用户从 AppShell 进入动作库时，默认先进入 `/systems`。
+2. 用户选择对应训练系统或风格。
+3. 系统进入 `/library/:systemId` 并只展示对应风格动作。
+4. 用户可以查看动作详情，包括能力画像、目标肌群、执行步骤、注意事项、图片和视频。
+5. 用户可以把动作加入训练编排，或创建自定义动作。
 
-Related frontend routes:
+相关前端路由：
 
 - `/systems`
 - `/library`
 - `/library/:systemId`
 - `/exercise/:id`
 
-### 2.3 Training Modules, Courses and Programs
+### 3.3 训练模块、训练课与计划
 
-The training domain is split into three levels:
+项目将训练内容拆分为三个层级：
 
-- Module: a quick training block, usually focused on one ability, joint function or short training purpose.
-- Course: a complete single-session training class with multiple blocks and detailed parameters.
-- Program: a weekly plan template that arranges modules/courses by Day 1, Day 2, etc.; actual calendar dates are attached only when the program starts.
+| 层级 | 含义 | 典型场景 |
+|---|---|---|
+| Module | 快速训练模块 | 踝关节稳定、髋灵活性、肩胛激活、拉伸放松 |
+| Course | 单节完整训练课 | 上肢力量课、爆发力训练课、有氧燃脂课、功能性训练课 |
+| Program | 一周训练计划模板 | Day 1 力量，Day 2 灵活性，Day 3 有氧，Day 4 恢复 |
 
-Main capabilities:
+训练计划中不直接写死具体日期，而是先使用 Day 1、Day 2 等相对天数。用户真正开始计划后，再根据开始日期映射到真实日历。
 
-- Quick module CRUD.
-- Course builder CRUD.
-- Program planner with day cards and draggable module/course templates.
-- Scientific block structure based on training style and user intent.
-- Save/apply templates.
-- Share module/course templates with Base62 short links.
-- TrainingHub reminder and continuity display for active program/day status.
-
-Related frontend routes:
+相关前端路由：
 
 - `/training`
 - `/modules`
@@ -87,88 +101,97 @@ Related frontend routes:
 - `/share/template/:shareCode`
 - `/s/:shareCode`
 
-### 2.4 Training Execution and Summary
+### 3.4 训练执行与总结
 
-1. A module or course is selected as a training plan.
-2. Workout player starts a real training run.
-3. Set, timer and exercise events are recorded as execution data.
-4. Summary page calculates statistics from actual execution logs instead of only reading planned values.
-5. Training history and profile charts consume backend statistics.
+1. 用户从 module、course 或 program 进入训练。
+2. 训练播放器展示当前动作、下一动作、计时、组数和休息逻辑。
+3. 用户真实执行时产生训练 run、set log、timer log、exercise log。
+4. 训练总结基于真实执行记录统计总次数、总重量、训练时长、动作完成情况等。
+5. 训练记录进入 TrainingHub、Recent Log、Weekly Snapshot 和 Athlete Profile。
 
-Related frontend routes:
+相关前端路由：
 
 - `/workout`
 - `/workout-summary`
 - `/athlete`
 
-### 2.5 Posture and Joint Function Module
+### 3.5 体态与关节功能模块
 
-The posture module provides a visual body map, risk-joint markers, selected joint detail panels and joint-specific scan images. It is designed for mobile and desktop layouts.
+体态模块用于展示身体关节风险点、关节状态和对应扫描图片。系统针对不同关节配置不同的图像资源，避免所有关节都复用同一张图。
 
-Related frontend route:
+相关前端路由：
 
 - `/posture`
 
-## 3. AI Capabilities
+## 4. AI 能力设计
 
-### 3.1 Plan Mode: Structured Training Design
+### 4.1 Plan 入口：训练编排
 
-The AI Plan entry is used for training design. It does not simply return free text; it attempts to guide the user through structured stages:
+Plan 入口用于生成训练方案，不用于普通问答。系统会根据用户自然语言判断训练意图，例如：
 
-- Identify whether the user needs a quick module or a full course.
-- Ask for missing constraints such as equipment, venue, duration and frequency.
-- Infer training style from user intent, for example strength, hypertrophy, functional stability, mobility, conditioning or rehab.
-- Generate visual A/B/C options for natural-language requests.
-- Generate a single plan for external short-video links, because link parsing should reproduce the video content rather than invent three unrelated plans.
-- Allow user refinements and regenerate structured plan payloads.
-- Write confirmed plans into the module/course builder.
+- “我想要上肢力量训练” -> 力量训练课。
+- “我想让肌肉更好看” -> 健美/增肌风格训练。
+- “我想提高脚踝稳定性” -> 功能性/稳定性训练模块。
+- “我想有氧燃脂” -> 有氧或 HIIT 风格训练。
 
-Implementation style:
+Plan 入口的设计要求：
 
-- The current implementation uses a stable structured JSON protocol, embedded in assistant responses, to simulate function-calling style frontend/backend coordination.
-- The frontend renders plan-scope, plan-intake and plan-options payloads as visual cards and buttons.
+- 先确认用户需要完整训练课还是快速训练模块。
+- 如果条件不足，询问器械、场地、时长、训练经验等。
+- 如果用户选择训练课，需要按训练风格补齐完整 block。
+- 如果用户选择快速 module，不应跳入训练课 builder，也不应把所有动作塞进第一个 block。
+- 输出应使用可视化方案卡片，而不是纯 Markdown 文本。
+- 自然语言生成训练时可以给 A/B/C 三个不同方案。
+- 外部链接解析时应尽量复现视频内容，一般只生成一个与视频对应的计划。
+- 用户可以继续对方案进行微调，例如替换动作、调整轮数、修改休息时间。
 
-Key files:
+当前实现采用稳定的结构化 JSON 协议来模拟 function calling 风格的数据联动，前端根据 payload 渲染可视化卡片、按钮和方案预览。
+
+关键文件：
 
 - `backend/ai-assistant-service/src/main/java/com/somaticbuilding/aiassistant/application/AiAssistantService.java`
 - `backend/ai-assistant-service/src/main/java/com/somaticbuilding/aiassistant/application/ExerciseAutoProvisionService.java`
 - `src/shared/api/assistant.ts`
 - `src/shared/components/AppShell.tsx`
 
-### 3.2 Q&A Mode: RAG Coaching Assistant
+### 4.2 Q&A 入口：RAG 知识问答
 
-The Q&A entry is separated from Plan mode. It is used for professional training knowledge questions rather than direct plan generation.
+Q&A 入口用于回答训练知识问题，不应该和训练计划生成混在一起。它通过本地 RAG 知识库检索相关内容，并将参考片段注入模型提示词。
 
-Current RAG capabilities:
+当前 RAG 能力：
 
-- Loads local classpath knowledge files from `rag-kb`.
-- Supports an external `knowledge-base` directory for future expansion.
-- Retrieves relevant chunks and injects them into the model prompt.
-- Provides fallback answers when model invocation is unavailable.
-- Keeps Plan and Q&A responsibilities separate to avoid mixing training generation with general knowledge answers.
+- 从 `rag-kb` 加载本地 Markdown 知识库。
+- 支持未来扩展外部 `knowledge-base` 目录。
+- 对知识内容分块、检索、排序。
+- 将相关上下文注入回答。
+- 模型不可用时可返回 fallback 回答。
 
-Key files:
+关键文件：
 
 - `backend/ai-assistant-service/src/main/java/com/somaticbuilding/aiassistant/application/RagKnowledgeService.java`
 - `backend/ai-assistant-service/src/main/resources/rag-kb/`
 
-### 3.3 Short-Video Link Parsing
+### 4.3 短视频链接解析
 
-The content-analysis pipeline is used to turn external video links into training plans or movement candidates.
+短视频解析功能用于将外部平台训练视频转成结构化训练内容。它和普通自然语言生成训练不同：
 
-Supported pipeline design:
+- 自然语言生成：根据用户需求生成多个候选训练方案。
+- 链接解析生成：应尽量还原视频里的训练内容，一般不应随意生成三个无关方案。
 
-- URL job creation.
-- `yt-dlp` based content extraction.
-- Subtitle and metadata extraction when available.
-- Audio extraction and ASR through Whisper/Docker mode.
-- Frame extraction through FFmpeg/FFprobe.
-- Visual analysis through multimodal model endpoint when configured.
-- Movement candidate extraction and review.
-- Auto-provisioning for exercises not found in the existing exercise library.
-- Plan draft generation from parsed content.
+当前设计流程：
 
-Key files:
+1. 用户提交外部视频链接。
+2. 后端创建 content analysis job。
+3. 使用 `yt-dlp` 获取视频元数据、字幕或下载可分析内容。
+4. 没有字幕时尝试音频提取和 ASR。
+5. 使用 FFmpeg/FFprobe 抽取关键帧。
+6. 可选调用视觉模型分析动作画面。
+7. 提取 movement candidates。
+8. 如果动作库找不到对应动作，调用动作新增接口进行自动补全。
+9. 用户可以查看候选动作并确认。
+10. 系统生成与视频内容对应的训练计划草案。
+
+关键文件：
 
 - `backend/ai-assistant-service/src/main/java/com/somaticbuilding/aiassistant/application/ContentAnalysisService.java`
 - `backend/ai-assistant-service/src/main/java/com/somaticbuilding/aiassistant/application/VideoLinkAutoExtractor.java`
@@ -176,11 +199,11 @@ Key files:
 - `backend/ai-assistant-service/src/main/java/com/somaticbuilding/aiassistant/application/VideoVisualAnalysisService.java`
 - `backend/ai-assistant-service/src/main/java/com/somaticbuilding/aiassistant/interfaces/ContentAnalysisController.java`
 
-## 4. Architecture
+## 5. 系统架构
 
 ```mermaid
 flowchart LR
-  User[User] --> Web[React + Vite Frontend]
+  User[用户] --> Web[React + Vite 前端]
   Web --> Gateway[Spring Cloud Gateway :8080]
   Gateway --> Auth[auth-service :8081]
   Gateway --> UserSvc[user-service :8082]
@@ -203,76 +226,77 @@ flowchart LR
   Recommendation --> MySQL
   AI --> MySQL
   Exercise --> Redis[(Redis :6380)]
-  AI --> LLM[External LLM / Multimodal APIs]
+  AI --> LLM[外部大模型接口]
   AI --> Tools[yt-dlp / FFmpeg / Whisper]
 ```
 
-## 5. Technology Stack
+## 6. 技术栈
 
-### Frontend
+### 6.1 前端
 
 - React 18
 - TypeScript / TSX
 - Vite 6
 - React Router
 - Tailwind CSS
-- Radix UI based component primitives
-- Material UI icons/components where needed
+- Radix UI 组件原语
+- Material UI 图标和部分组件
 - Three.js / React Three Fiber / Drei
-- D3 and Recharts for visual data presentation
-- React DnD for builder and program planning interactions
-- Vitest for frontend unit tests
+- D3 / Recharts 数据可视化
+- React DnD 拖拽交互
+- Vitest 单元测试
 
-### Backend
+### 6.2 后端
 
 - Java 17
 - Spring Boot 3.2
 - Spring Cloud 2023
 - Spring Cloud Gateway
-- Spring Cloud Alibaba dependency set
+- Spring Cloud Alibaba 依赖体系
 - MyBatis-Plus
 - MySQL
 - Redis
-- Spring AI integration style
-- JUnit 5 / Mockito / MockMvc for tests
+- Spring AI 风格集成
+- JUnit 5 / Mockito / MockMvc 自动化测试
 
-### AI and Media Tooling
+### 6.3 AI 与媒体处理
 
-- OpenAI-compatible model endpoints
-- DeepSeek-compatible model endpoint
-- DashScope-compatible endpoint configuration
+- OpenAI-compatible 模型接口
+- DeepSeek-compatible 模型接口
+- DashScope-compatible 模型接口
 - yt-dlp
 - FFmpeg / FFprobe
-- Whisper ASR through Docker mode
+- Docker 模式 Whisper ASR
 
-### Engineering and Quality
+### 6.4 工程质量
 
-- Git LFS for large 3D/body-model assets
-- k6 load-test scripts and performance reports
-- SQL indexes and Redis hotspot cache optimization evidence
-- Frontend and backend automated tests
+- Git LFS 管理大型 3D 模型和媒体资源。
+- k6 核心链路压测。
+- Redis 热点缓存优化。
+- SQL 索引优化。
+- 前端单元测试和后端单元/集成测试。
 
-## 6. Backend Services
+## 7. 后端服务划分
 
-| Service | Port | Responsibility |
+| 服务 | 端口 | 职责 |
 |---|---:|---|
-| gateway-service | 8080 | API gateway and route aggregation |
-| auth-service | 8081 | Login, registration and OAuth-related auth flow |
-| user-service | 8082 | User profile/account data |
-| exercise-service | 8083 | Exercise library, exercise media, filtering, cache |
-| workout-service | 8084 | Module/course/template/program planning APIs |
-| training-service | 8085 | Training run, execution logs, history and summaries |
-| assessment-service | 8086 | Functional assessment sessions and results |
-| profile-service | 8087 | Ability profile and athlete data aggregation |
-| posture-service | 8088 | Posture snapshots and joint state data |
-| recommendation-service | 8089 | Recommendation data for TrainingHub/Profile |
-| ai-assistant-service | 8090 | AI plan, RAG Q&A, goal synthesis and video-link parsing |
+| gateway-service | 8080 | API 网关和路由聚合 |
+| auth-service | 8081 | 登录、注册、OAuth 相关认证流程 |
+| user-service | 8082 | 用户账号和个人信息 |
+| exercise-service | 8083 | 动作库、动作媒体、筛选、缓存 |
+| workout-service | 8084 | Module/Course/Program/Template 编排接口 |
+| training-service | 8085 | 训练执行、训练日志、历史和总结 |
+| assessment-service | 8086 | 功能评估会话和结果 |
+| profile-service | 8087 | 能力画像和运动员数据聚合 |
+| posture-service | 8088 | 体态快照和关节状态数据 |
+| recommendation-service | 8089 | TrainingHub/Profile 推荐数据 |
+| ai-assistant-service | 8090 | AI 训练编排、RAG 问答、目标分析、短视频解析 |
 
-## 7. Repository Structure
+## 8. 项目目录结构
 
 ```text
 D:/somaticBuilding
-├── backend/                         # Spring Boot/Spring Cloud backend services
+├── backend/                         # Spring Boot/Spring Cloud 后端服务
 │   ├── gateway-service/
 │   ├── auth-service/
 │   ├── user-service/
@@ -285,32 +309,33 @@ D:/somaticBuilding
 │   ├── recommendation-service/
 │   ├── ai-assistant-service/
 │   └── common-lib/
-├── src/                             # React frontend source code
-│   ├── app/                         # App entry and routes
-│   ├── modules/                     # Feature modules: home/library/training/profile/system/posture
-│   ├── shared/                      # API clients, shared components, data and utilities
-│   └── styles/                      # Global CSS/Tailwind/theme files
-├── public/                          # Static assets and body/exercise/posture media
-├── scripts/                         # Data import, exercise media and performance helper scripts
-├── docs/                            # API, architecture, database, PRD, testing and performance docs
-├── guidelines/                      # Project guidelines
-├── package.json                     # Frontend scripts and root test commands
-├── pnpm-lock.yaml                   # Dependency lockfile
-└── vite.config.ts                   # Vite configuration
+├── src/                             # React 前端源码
+│   ├── app/                         # 应用入口和路由
+│   ├── modules/                     # home/library/training/profile/system/posture 等业务模块
+│   ├── shared/                      # API 客户端、公共组件、公共数据和工具函数
+│   └── styles/                      # 全局样式和主题
+├── public/                          # 静态资源、体态模型、动作/体态图片等
+├── scripts/                         # 数据导入、媒体回填、性能测试脚本
+├── docs/                            # API、架构、数据库、PRD、测试、压测文档
+├── guidelines/                      # 项目规范
+├── package.json                     # 前端脚本和根测试命令
+├── pnpm-lock.yaml                   # 依赖锁定文件
+├── README.md                        # Chinese README, shown by default on GitHub
+└── README.en.md                     # English README
 ```
 
-## 8. Database Scripts
+## 9. 数据库脚本
 
-Database design and initialization files are stored under `docs/database`:
+数据库设计和初始化脚本位于 `docs/database`。
 
-| File | Purpose |
+| 文件 | 作用 |
 |---|---|
-| `docs/database/DB-INIT.sql` | Main database initialization script |
-| `docs/database/DB-DDL-DRAFT.sql` | Core table DDL draft |
-| `docs/database/DB-DDL-CONTENT-ANALYSIS.sql` | Content-analysis and video-link parsing related tables |
-| `docs/database/migrations/2026-05-09-exercise-performance-indexes.sql` | Exercise-list performance indexes |
+| `docs/database/DB-INIT.sql` | 主要数据库初始化脚本 |
+| `docs/database/DB-DDL-DRAFT.sql` | 核心表结构 DDL 草案 |
+| `docs/database/DB-DDL-CONTENT-ANALYSIS.sql` | 短视频解析/content analysis 相关表 |
+| `docs/database/migrations/2026-05-09-exercise-performance-indexes.sql` | 动作列表性能索引优化 |
 
-Default local database settings used by backend configs:
+本地默认数据库配置：
 
 ```text
 MySQL host: localhost
@@ -324,15 +349,15 @@ Redis port: 6380
 Password: ${REDIS_PASSWORD:123456}
 ```
 
-## 9. Environment Configuration
+## 10. 环境变量和密钥管理
 
-A safe example file is provided:
+项目提供了安全示例文件：
 
 ```text
 .env.example
 ```
 
-Important variables:
+主要变量：
 
 ```bash
 MYSQL_HOST=127.0.0.1
@@ -352,13 +377,13 @@ FFMPEG_COMMAND=ffmpeg
 AUTO_VIDEO_DURATION_SEC=8
 ```
 
-Real AI keys should not be committed to Git. For local development, use either system environment variables or an ignored private Spring config file:
+真实 AI Key 不应提交到 GitHub。推荐使用系统环境变量，或使用本地私有配置文件：
 
 ```text
 backend/ai-assistant-service/src/main/resources/application-local-private.yml
 ```
 
-Example local private config:
+示例：
 
 ```yaml
 spring:
@@ -369,43 +394,43 @@ spring:
       api-key: your-deepseek-key
 ```
 
-This file is ignored by Git and is loaded automatically by `ai-assistant-service` when present.
+该文件被 `.gitignore` 忽略，不会被上传到 GitHub，但本地启动 `ai-assistant-service` 时会自动读取。
 
-## 10. Local Development
+## 11. 本地运行
 
-### 10.1 Prerequisites
+### 11.1 环境要求
 
 - Node.js 18+
-- pnpm through Corepack, or npm
+- pnpm 或 npm
 - Java 17
 - Maven 3.8+
-- MySQL running on port `3308`
-- Redis running on port `6380`
-- Git LFS, because the repository contains large model/media assets
-- Optional for short-video parsing: Docker, yt-dlp, FFmpeg, FFprobe
+- MySQL，端口 `3308`
+- Redis，端口 `6380`
+- Git LFS
+- 可选：Docker、yt-dlp、FFmpeg、FFprobe，用于短视频解析
 
-### 10.2 Install Frontend Dependencies
+### 11.2 安装前端依赖
 
 ```bash
 corepack enable
 pnpm install
 ```
 
-If using npm instead:
+或使用 npm：
 
 ```bash
 npm install
 ```
 
-### 10.3 Initialize Database
+### 11.3 初始化数据库
 
-Create database and import SQL scripts from `docs/database`. The main initialization file is:
+先创建数据库，再执行 `docs/database` 下的 SQL 文件。主要初始化脚本：
 
 ```bash
 docs/database/DB-INIT.sql
 ```
 
-Additional DDL and migration files can be applied depending on the target feature set:
+根据功能需要继续执行：
 
 ```bash
 docs/database/DB-DDL-DRAFT.sql
@@ -413,16 +438,16 @@ docs/database/DB-DDL-CONTENT-ANALYSIS.sql
 docs/database/migrations/2026-05-09-exercise-performance-indexes.sql
 ```
 
-### 10.4 Start Backend Services
+### 11.4 启动后端服务
 
-From the backend directory:
+进入后端目录：
 
 ```bash
 cd backend
 mvn clean install -DskipTests
 ```
 
-Run services as needed. Typical local startup order:
+按需启动服务。典型本地启动顺序：
 
 ```bash
 mvn -pl gateway-service spring-boot:run
@@ -438,98 +463,95 @@ mvn -pl recommendation-service spring-boot:run
 mvn -pl ai-assistant-service spring-boot:run
 ```
 
-For normal frontend testing, at minimum the gateway plus the services used by the current page should be running.
+开发时不一定要启动所有服务，只需要启动当前页面依赖的服务即可。正常前端联调一般至少需要 gateway 和对应业务服务。
 
-### 10.5 Start Frontend
+### 11.5 启动前端
 
-From the project root:
+在项目根目录执行：
 
 ```bash
 npm run dev
 ```
 
-Default Vite URL:
+默认访问地址：
 
 ```text
 http://localhost:5173
 ```
 
-## 11. Data Import and Media Scripts
+## 12. 数据导入和媒体脚本
 
-Useful scripts are stored under `scripts`:
+`scripts` 目录包含动作导入、媒体回填和性能测试相关脚本。
 
-| Script | Purpose |
+| 脚本 | 作用 |
 |---|---|
-| `scripts/import-open-exercises.mjs` | Import open exercise data into local data files |
-| `scripts/sync-open-exercises-to-mysql.mjs` | Sync exercise data to MySQL |
-| `scripts/backfill-exercise-cover-images.mjs` | Backfill static exercise cover images |
-| `scripts/backfill-exercise-covers-from-video.mjs` | Extract covers from video sources |
-| `scripts/backfill-exercise-videos.mjs` | Backfill exercise video media |
-| `scripts/migrate-exercise-videos-to-remote.mjs` | Migrate local generated videos to remote GIF/video sources |
-| `scripts/perf/exercise_list_load.js` | k6 exercise-list load-test script |
+| `scripts/import-open-exercises.mjs` | 导入开源动作数据到本地数据文件 |
+| `scripts/sync-open-exercises-to-mysql.mjs` | 将动作数据同步到 MySQL |
+| `scripts/backfill-exercise-cover-images.mjs` | 回填动作静态封面图 |
+| `scripts/backfill-exercise-covers-from-video.mjs` | 从视频源提取封面帧 |
+| `scripts/backfill-exercise-videos.mjs` | 回填动作视频资源 |
+| `scripts/migrate-exercise-videos-to-remote.mjs` | 将本地生成视频迁移为远程 GIF/视频源 |
+| `scripts/perf/exercise_list_load.js` | k6 动作列表压测脚本 |
 
-## 12. Testing and Verification
+## 13. 测试与验证
 
-### 12.1 Frontend Unit Tests
+### 13.1 前端单元测试
 
 ```bash
 npm run test:frontend
 ```
 
-### 12.2 Backend Unit and Integration Tests
+### 13.2 后端单元测试和集成测试
 
 ```bash
 npm run test:backend
 ```
 
-Equivalent backend command:
+等价命令：
 
 ```bash
 cd backend
 mvn -pl ai-assistant-service,training-service -am test
 ```
 
-### 12.3 Full Test Command
+### 13.3 一键测试
 
 ```bash
 npm run test
 ```
 
-### 12.4 Production Build
+### 13.4 生产构建
 
 ```bash
 npm run build
 ```
 
-Testing report:
+测试报告位置：
 
 ```text
 docs/testing/test-report-2026-05-29.md
 ```
 
-## 13. Performance Evidence
+## 14. 性能压测与优化证据
 
-The project includes k6 load-test scripts and reports for graduation-defense style engineering evidence.
+项目包含 k6 压测脚本和性能报告，用于证明核心链路具备一定工程优化能力。
 
-Key reports:
+关键报告：
 
 - `docs/performance/reports/2026-05-09-exercise-core-chain-loadtest.md`
 - `docs/performance/reports/2026-05-09-gateway-cache-loadtest.md`
 - `docs/performance/reports/exercise_list_comparison.md`
 - `docs/performance/reports/gateway_exercise_list_cache_comparison.md`
 
-Implemented optimization examples:
+已完成的优化示例：
 
-- SQL index optimization for exercise-list queries.
-- Exercise media query batching to reduce N+1 style access.
-- Redis hotspot cache for exercise-list endpoint.
-- Micrometer/Prometheus metrics on exercise-service.
+- 动作列表 SQL 索引优化。
+- 动作媒体批量查询，降低 N+1 查询风险。
+- 动作列表 Redis 热点缓存。
+- exercise-service 接入 Micrometer/Prometheus 指标。
+- 对 20/50/100 并发场景进行压测，并记录优化前后对比。
 
-A documented local single-node capacity statement exists in the performance reports.
-
-## 14. API and Design Documents
-
-Important documentation:
+## 15. 重要文档
 
 - `docs/api/API-SPEC.md`
 - `docs/api/API-MODULES.md`
@@ -541,24 +563,31 @@ Important documentation:
 - `docs/prd/E2E-REGRESSION-CHECKLIST.md`
 - `docs/ai-rag-function-calling.md`
 
-## 15. Current Engineering Scope
+## 16. 当前工程范围
 
-This repository currently contains:
+当前仓库包含：
 
-- Frontend application source code.
-- Backend microservice source code.
-- Database schema and migration scripts.
-- Exercise data and static media resources.
-- AI/RAG/video-link parsing implementation.
-- Testing and performance documentation.
-- Git LFS tracked large public model/media assets.
+- 前端应用源码。
+- 后端微服务源码。
+- 数据库表结构和迁移脚本。
+- 动作数据和静态媒体资源。
+- AI/RAG/短视频解析相关实现。
+- 自动化测试和性能测试文档。
+- Git LFS 管理的大型模型和媒体资源。
 
-The project is still evolving. Some production-level capabilities, such as complete cloud deployment, centralized service discovery, vector-database RAG, and fully managed media storage, are planned as future improvements.
+仍可继续扩展的方向：
 
-## 16. Security Notes
+- 完整云部署和服务治理。
+- 更正式的原生 function calling schema。
+- 向量数据库版 RAG。
+- 更完善的媒体对象存储。
+- 更多端到端测试和 Testcontainers 数据库集成测试。
+- 更完整的移动端适配和真实用户训练数据分析。
 
-- Do not commit real API keys or private credentials.
-- Use environment variables or `application-local-private.yml` for local AI keys.
-- `.env` and private local config files are ignored by Git.
-- Large model/media assets are managed through Git LFS.
-- Local generated logs, build outputs, caches and temporary video-analysis frames are ignored.
+## 17. 安全说明
+
+- 不要将真实 API Key 或私有凭据提交到 GitHub。
+- 本地 AI Key 使用环境变量或 `application-local-private.yml`。
+- `.env` 和私有配置文件已被 `.gitignore` 忽略。
+- 运行日志、构建产物、缓存和临时视频分析帧不会上传。
+- 大型 3D 模型和媒体资源通过 Git LFS 管理。
